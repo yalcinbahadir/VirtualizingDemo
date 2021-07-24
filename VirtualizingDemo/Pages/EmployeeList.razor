@@ -1,0 +1,39 @@
+﻿@page "/employeelist"
+@inherits EmployeeListBase
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+<style>
+    .virtiualized{
+        overflow:auto;
+        width:100%;
+        height:600px;
+    }
+</style>
+<h3>Employee List</h3>
+@if (Employees is null)
+{
+    <p><em>Loading ...</em></p>
+}
+else
+{
+    <div class="virtiualized">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <Virtualize Items="Employees" ItemSize="itemHeight">
+                    <tr @key="@context.GetHashCode()" >
+                        <td>@context.Id</td>
+                        <td>@context.FirstName</td>
+                        <td>@context.LastName</td>
+                    </tr>
+                </Virtualize>
+            </tbody>
+
+        </table>
+    </div>
+} 
